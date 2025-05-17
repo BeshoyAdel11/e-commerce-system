@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart, deleteFromCart } from "../store/cartSlice";
-import { products } from "../data/products";
-import delete_icon from "../assets/icons/delete.svg";
-import Header from "../components/Header";
+ import { products } from "../data/products";
+ import Header from "../components/Header";
 import RenderCart from "../components/RenderCart";
 
 function Cart() {
-  const dispatch = useDispatch();
+  
   const cart = useSelector((state) => state.cart);
 
   const cartItems = Object.entries(cart).map(([id, qty]) => {

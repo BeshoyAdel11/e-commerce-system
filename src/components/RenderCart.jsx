@@ -1,4 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
+import delete_icon from "../assets/icons/delete.svg";
+import { addToCart, removeFromCart, deleteFromCart } from "../store/cartSlice";
+
 function RenderCart({item}) {
+     const dispatch = useDispatch();
+       const cart = useSelector((state) => state.cart);
+
   return (
     <div
       key={item.id}
