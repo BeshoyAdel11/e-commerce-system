@@ -45,7 +45,6 @@ function ProductList() {
   const tax = 12.5;
   const total = subtotal + shipping + tax;
 
-  // Pagination Logic
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
@@ -73,9 +72,9 @@ function ProductList() {
     <section className="bg-gray-100">
       <Header />
       <div className="container mx-auto p-4 md:p-6">
-        <div className="flex flex-col md:flex-row gap-6 ">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Filter */}
-          <div className="w-[50px] hidden  h-[50px] md:flex items-center justify-center rounded-[8px] bg-white">
+          <div className="w-[50px] hidden h-[50px] md:flex items-center justify-center rounded-[8px] bg-white">
             <button onClick={() => setIsModalOpen(true)}>
               <img src={filter} alt="filter" className="w-6 h-6" />
             </button>
@@ -86,27 +85,32 @@ function ProductList() {
             />
           </div>
           {/* Products Grid */}
-          <div className="w-full p-6 bg-white md:w-3/4">
+          <div className="w-full md:w-3/4 md:flex-shrink-1 p-6 rounded-xl bg-white">
+          <div className="py-4 mb-4 hidden md:flex flex-row gap-1 text-[14px] text-[#6B7280] leading-[20px] font-[400]  Roboto ">
+          <Link  to="/products">
+          Home
+          </Link>
+          <span>/</span>
+          <span className="text-[#111827]">Casual</span>
+        </div>
             <div className="pb-6">
-              <div className="flex flex-row trounded-lg p-3 items-center border h-[46px] border-[#E5E7EB]">
+              <div className="flex flex-row rounded-lg p-3 items-center border h-[46px] border-[#E5E7EB]">
                 <img
                   className="object-contain w-4 h-4"
                   src={search_2}
                   alt="search"
                 />
-
                 <input
                   type="text"
                   placeholder="Search by product name"
                   value={searchTerm}
                   onChange={(e) => {
                     setSearchTerm(e.target.value);
-                    setCurrentPage(1); // Reset to first page on search change
+                    setCurrentPage(1);
                   }}
-                  className="w-full text-[14px] Roboto  font-[500] leading-[20px]  pl-4 h-full outline-none"
+                  className="w-full text-[14px] Roboto font-[500] leading-[20px] pl-4 h-full outline-none"
                 />
-
-                <div className="w-[32px] md:hidden  h-[32px] flex items-center justify-center rounded-full bg-[#F0F0F0]">
+                <div className="w-[32px] md:hidden h-[32px] flex items-center justify-center rounded-full bg-[#F0F0F0]">
                   <button onClick={() => setIsModalOpen(true)}>
                     <img src={filter} alt="filter" className="w-4 h-4" />
                   </button>
@@ -118,28 +122,31 @@ function ProductList() {
                 </div>
               </div>
             </div>
-            <div className="pb-6  ">
-              <h1 className="text-[24px] Roboto  font-[700] leading-[32px]">
+            <div className="pb-6">
+              <h1 className="text-[24px] Roboto font-[700] leading-[32px]">
                 Casual
               </h1>
             </div>
-            <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+             <div className="pb-6">
+              <span className="text-[14px] Roboto font-[400] Roboto text-[#6B7280] leading-[20px]">
+              Showing 1-6 of 6 Products
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentProducts.map((product) => (
                 <RenderItems product={product} />
               ))}
             </div>
-            {/* Pagination */}
             <div className="flex justify-between items-center gap-4 mt-6">
               <button
                 onClick={handlePrevPage}
-                className="px-4 py-2 bg-gray-200 rounded-md  text-[12px] md:text-[16px] Roboto  font-[400] leading-[] md:leading-[24px] hover:bg-gray-300 disabled:opacity-50"
+                className="px-4 py-2 bg-gray-200 rounded-md text-[12px] md:text-[16px] Roboto font-[400] leading-[] md:leading-[24px] hover:bg-gray-300 disabled:opacity-50"
                 disabled={currentPage === 1}
               >
                 Previous
               </button>
-
-              <span className=" flex justify-center items-center text-[12px] md:text-[16px] Roboto  font-[400] leading-[24px] bg-[#000000] w-8 h-8 text-white rounded-[4px]">
-                {currentPage} {/*totalPages*/}
+              <span className="flex justify-center items-center text-[12px] md:text-[16px] Roboto font-[400] leading-[24px] bg-[#000000] w-8 h-8 text-white rounded-[4px]">
+                {currentPage}
               </span>
               <button
                 onClick={handleNextPage}
@@ -152,7 +159,7 @@ function ProductList() {
           </div>
 
           {/* Order Summary */}
-          <div className="w-full md:w-1/4 bg-gray-100  ">
+          <div className="w-full md:w-1/4 md:flex-shrink-0 md:min-w-[250px] bg-gray-100">
             <div className="bg-white p-6 rounded-lg">
               <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
               <div>
@@ -160,7 +167,7 @@ function ProductList() {
                   <OrderSummary item={item} />
                 ))}
               </div>
-              <div className=" mt-2 pt-2">
+              <div className="mt-2 pt-2">
                 <div className="flex justify-between text-sm mb-1">
                   <span>Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
@@ -169,11 +176,11 @@ function ProductList() {
                   <span>Shipping</span>
                   <span>${shipping.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between border-b border-b-[#D1D5DB]  text-sm pb-3">
+                <div className="flex justify-between border-b border-b-[#D1D5DB] text-sm pb-3">
                   <span>Tax</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between  text-lg font-semibold mt-2">
+                <div className="flex justify-between text-lg font-semibold mt-2">
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>

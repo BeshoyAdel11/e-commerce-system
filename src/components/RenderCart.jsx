@@ -9,14 +9,21 @@ function RenderCart({item}) {
   return (
     <div
       key={item.id}
-      className="flex rounded-lg border border-[#F3F4F6]  h-[219px]  mb-4 p-2"
+      className="flex rounded-lg border border-[#F3F4F6]  h-[219px]  mb-4  md:p-2"
     >
-      <img
+      <div className=" relative w-[150px] md:w-[192px]  -">
+         <img
         src={item.image}
         alt={item.name}
-        className="w-[165px] md:w-[192px]  object-contain mr-4"
+        className="w-full h-full object-contain md:mr-4"
       />
-      <div className="flex-1 flex flex-col justify-evenly p-4">
+
+      <div className="absolute w-7 h-7 rounded-full bg-[#2563EB] flex items-center justify-center bottom-5 right-0">
+        <span className="  text-[10px] md:text-[14px]  font-[400] leading-[13px] md:leading-[20px] text-white ">{cart[item.id] || 0}</span>
+      </div>
+      </div>
+      
+      <div className="flex-1 flex flex-col justify-evenly p-3 md:p-4">
         <div className="flex  justify-between items-center">
           <div className="flex flex-col md:flex-row gap-2">
             <h3 className="text-[12px] md:text-[13px] Roboto font-[500] leading-[15px] md:leading-[24px]">

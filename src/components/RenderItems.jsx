@@ -10,11 +10,17 @@ function RenderItems({ product }) {
       key={product.id}
       className="bg-white p-1 rounded-lg shadow-md text-center"
     >
-      <img
+      <div className="relative w-full h-[159px] md:h-48">
+         <img
         src={product.image}
         alt={product.name}
-        className="w-full h-[159px] md:h-48 object-contain"
+        className="w-full h-full object-contain"
       />
+      <div className="absolute w-7 h-7 rounded-full bg-[#2563EB] flex items-center justify-center bottom-0 right-0">
+        <span className="  text-[10px] md:text-[14px]  font-[400] leading-[13px] md:leading-[20px] text-white ">{cart[product.id] || 0}</span>
+      </div>
+      </div>
+       
 
       <div className="p-4 flex flex-col gap-4 md:gap-2">
         <div className="flex flex-row justify-between items-center">
